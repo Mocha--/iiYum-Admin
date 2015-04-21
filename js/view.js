@@ -14,17 +14,16 @@ var ContainerView = Backbone.View.extend({
         this.$el.html(view)
         return this
     }
-
 })
 
 var CategoryListView = Backbone.View.extend({
-    "el": "ul",
+    "el": $("#pageContent"),
     "collection": {},
-    "liTemplate": {},
+    "template": {},
 
     initialize: function() {
-        // this.loadTemplate(this)
-        this.liTemplate = _.template($("#categoryLiTemplate"))
+        console.log(this.el)
+        this.template = _.template($("#categoryListTemplate"))
         this.listenTo(this.collection, "change", this.render)
     },
 

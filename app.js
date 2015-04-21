@@ -14,21 +14,32 @@ var mainView = app.addView(".view-main", {
 var Router = Backbone.Router.extend({
 
     "routes": {
-        "": "categoryList",
+        "": "main",
+        "category": "categoryList",
         "category/:categoryId": "categoryDetail",
         "category/:categoryId/:productId": "productDetail"
     },
 
-    categoryList: function() {
-        mainView.router.reloadPage("html/categoryList.html")
-
-        var categoryCollection = new CategoryCollection()
-        var categoryListView = new CategoryListView({
-            "collection": categoryCollection
+    main:function(){
+        $("#categoryLink").click(function(){
+            mainView.router.loadPage("html/categoryList.html")
         })
-        var containerView = new ContainerView(categoryListView)
+    },
 
-        categoryCollection.fetch()
+    categoryList: function() {
+        //mainView.router.loadPage("html/categoryList.html")
+
+        /*
+        app.onPageInit("category", function(page) {
+            var categoryCollection = new CategoryCollection() 
+            var categoryListView = new CategoryListView({
+                "collection": categoryCollection
+            })
+            var containerView = new ContainerView(categoryListView)
+
+            categoryCollection.fetch()
+        })
+*/
     },
 
     categoryDetail: function(category_id) {
