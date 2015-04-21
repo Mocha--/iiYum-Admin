@@ -3,9 +3,11 @@
 // use stict mode
 "use stict"
 
-var app = new Framework7()
+var app = new Framework7({
+    "router": false
+})
 
-var mainView = app.addView(".view-main" , {
+var mainView = app.addView(".view-main", {
     "dynamicNavbar": true
 })
 
@@ -18,9 +20,15 @@ var Router = Backbone.Router.extend({
         "category/:categoryId/:productId": "productDetail"
     },
 
-    categoryList: function() {
+    main: function() {
+        $("#categoryLink").click(function() {
+            $("#")
+            mainView.router.loadPage("html/categoryList.html")
+        })
 
-        mainView.router.loadPage('about.html');
+    },
+
+    categoryList: function() {
 
         var categoryCollection = new CategoryCollection()
         var categoryListView = new CategoryListView({
