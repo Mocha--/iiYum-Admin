@@ -5,15 +5,22 @@
 
 var app = new Framework7()
 
+var mainView = app.addView(".view-main" , {
+    "dynamicNavbar": true
+})
+
 var Router = Backbone.Router.extend({
 
     "routes": {
-        "": "categoryList",
+        "": "main",
+        "category": "categoryList",
         "category/:categoryId": "categoryDetail",
         "category/:categoryId/:productId": "productDetail"
     },
 
     categoryList: function() {
+
+        mainView.router.loadPage('about.html');
 
         var categoryCollection = new CategoryCollection()
         var categoryListView = new CategoryListView({
