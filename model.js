@@ -2,8 +2,8 @@
 
 "use strict"
 
-var HOST = "http://localhost/iiYum-Backend/ciadmin/index.php"
-
+//var HOST = "http://localhost/iiYum-Backend/ciadmin/index.php"
+var HOST = "http://localhost/php/iiyum/ciadmin/index.php"
 var Category = Backbone.Model.extend({
 
 	defaults : {
@@ -50,13 +50,12 @@ var Product = Backbone.Model.extend({
 var ProductCollection = Backbone.Collection.extend({
 
 	model : Product,
-	url : "http://localhost/php/iiyum/ciadmin/index.php/product/getproductsbycategoryid/?category_id="
+	url : HOST + "/product/getproductsbycategoryid/?category_id="
 
 })
 
 //get a single product
 var Single = Backbone.Model.extend({
-	//urlRoot : 'http://localhost/php/iiyum/ciadmin/index.php/product/singleproduct/?model=100&language_id=1',
 
 	defaults : {
 		model : "",
@@ -71,6 +70,6 @@ var Single = Backbone.Model.extend({
 var SingleCollection = Backbone.Collection.extend({
 
 	model : Single,
-	url : "http://localhost/php/iiyum/ciadmin/index.php/product/singleproduct/?model="
+	url : HOST + "/product/singleproduct/?model="
 
 })
