@@ -54,8 +54,8 @@ var ProductCollection = Backbone.Collection.extend({
 
 })
 
-//get a single product
-var Single = Backbone.Model.extend({
+//get info of a products
+var Info = Backbone.Model.extend({
 
 	defaults : {
 		model : "",
@@ -67,9 +67,9 @@ var Single = Backbone.Model.extend({
 	}
 })
 
-var SingleCollection = Backbone.Collection.extend({
+var InfoCollection = Backbone.Collection.extend({
 
-	model : Single,
+	model : Info,
 	url : HOST + "/product/singleproduct/?model="
 
 })
