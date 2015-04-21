@@ -3,71 +3,45 @@
 // use stict mode
 "use stict"
 
-var app = new Framework7({
-    "router": false
-})
+$(document).ready(function() {
+    var app = new Framework7({
+        "router": false
+    })
 
-var mainView = app.addView(".view-main", {
-    "dynamicNavbar": true
-})
+    var mainView = app.addView(".view-main", {
+        "dynamicNavbar": true
+    })
 
-var Router = Backbone.Router.extend({
+    var Router = Backbone.Router.extend({
 
-    "routes": {
-        "": "main",
-        "category": "categoryList",
-        "category/:categoryId": "categoryDetail",
-        "category/:categoryId/:productId": "productDetail"
-    },
+        "routes": {
+            "": "categoryList",
+            "category/:categoryId": "categoryDetail",
+            "category/:categoryId/:productId": "productDetail"
+        },
 
-    main:function(){
-        $("#categoryLink").click(function(){
-            mainView.router.loadPage("html/categoryList.html")
-        })
-    },
-
-    categoryList: function() {
-        //mainView.router.loadPage("html/categoryList.html")
-
-        /*
-        app.onPageInit("category", function(page) {
-            var categoryCollection = new CategoryCollection() 
-            var categoryListView = new CategoryListView({
-                "collection": categoryCollection
+        categoryList: function() {
+            mainView.router.load({
+                "url": "html/categoryList.html"
             })
-            var containerView = new ContainerView(categoryListView)
 
-            categoryCollection.fetch()
-        })
-*/
-    },
-
-    categoryDetail: function(category_id) {
-        var productcollection = new ProductCollection()
-        productcollection.url += category_id
-        productcollection.fetch({
-            success: function(collection, res) {
-                var productListView = new ProductListView({
-                    "collection": productcollection
+            app.onPageInit("category", function(page) {
+                $("#categoryList").empty()
+                var categoryCollection = new CategoryCollection()
+                var categoryListView = new CategoryListView({
+                    "el": $("#categoryList")
                 })
-            }
-        })
-
-    },
-
-    productDetail: function(category_id, model_id) {
-        var product = new SingleCollection()
-        product.url += (model_id + "&language_id=1")
-        product.fetch({
-            success: function(collection, res) {
-                var singleproductview = new SingleView({
-                    "collection": product
+                categoryCollection.fetch({
+                    success: function(collection, res) {
+                        collection.trigge("fetch")
+                    }
                 })
-            }
-        })
-    }
+            })
+        }
+    })
+
+    var router = new Router()
+
+    Backbone.history.start()
+
 })
-
-var router = new Router()
-
-Backbone.history.start()

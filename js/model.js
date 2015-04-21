@@ -28,6 +28,12 @@ var Category = Backbone.Model.extend({
 
 var CategoryCollection = Backbone.Collection.extend({
 
+    initialize: function() {
+        this.on("fetch", function() {
+            console.log("trigger fetch event")
+        })
+    },
+
     model: Category,
     url: HOST + "/product/getcategories"
 })
