@@ -33,7 +33,7 @@ $(document).ready(function() {
                 })
                 categoryCollection.fetch({
                     success: function(collection, res) {
-                        collection.trigge("fetch")
+                        collection.trigger("fetch")
                     }
                 })
             })
