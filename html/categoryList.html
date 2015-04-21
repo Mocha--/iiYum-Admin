@@ -20,9 +20,6 @@
         <div class="page-content">
             <!-- Link to another page -->
             <ul>
-                 <script id = "categoryListTemplate" type="text/template">
-                 <%= categoryName %>
-                </script>
             </ul>
         </div>
     </div>
@@ -35,3 +32,10 @@
         <a href="#" class="link">Link 2</a>
     </div>
 </div>
+<script id="categoryListTemplate" type="text/template">
+    <%= _.each(collection , function(item){ %>
+        <li>
+            <%= item.name %>
+        </li>
+    <%= }) %>
+</script>
