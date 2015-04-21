@@ -30,3 +30,4 @@ var ProductListView = Backbone.View.extend({
         }))
     }
 })
+

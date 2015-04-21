@@ -73,46 +73,11 @@ var Router = Backbone.Router.extend({
             })
         })
     },
-/*
-    category_back: function(){
 
-        mainView.router.back({
-                url:'html/categoryList.html',
-                reload:false,
-                ignoreCache:false
-            });
-            App.onPageBack('category_list', function (page) {
-                myApp.mainView.loadPage('');
-            });
-    }
-
-    /*
-    categoryDetail: function(category_id) {
-        var productcollection = new ProductCollection()
-        productcollection.url += category_id
-        productcollection.fetch({
-            success: function(collection, res) {
-                var productListView = new ProductListView({
-                    "collection": productcollection
-                })
-            }
-        })
-
-    },
-
-    productDetail: function(category_id, model_id) {
-        var product = new SingleCollection()
-        product.url += (model_id + "&language_id=1")
-        product.fetch({
-            success: function(collection, res) {
-                var singleproductview = new SingleView({
-                    "collection": product
-                })
-            }
-        })
-    }*/
 })
 
 var router = new Router()
 
 Backbone.history.start()
+
+
