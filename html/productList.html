@@ -6,7 +6,7 @@
                 <span>Back</span></a>
         </div>
         <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-        <div class="center sliding">Category</div>
+        <div class="center sliding">Product</div>
         <div class="right">
             <!-- 
                 Right link contains only icon - additional "icon-only" class
@@ -19,20 +19,20 @@
 <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
 <div class="pages navbar-through toolbar-through">
     <!-- Page, "data-page" contains page name -->
-    <div data-page="category" class="page">
+    <div data-page="product" class="page">
         <!-- Scrollable page content -->
         <div id = "pageContent" class="page-content list-block">
             <!-- Link to another page -->
-            <ul id = "categoryList">
+            <ul id = "productList">
 
             </ul>
-            <script id="categoryListTemplate" type="text/template">
+            <script id="productListTemplate" type="text/template">
                     <% _.each(list , function(item){ %>
                         <li>
-                            <a href= "#category/<%= item.category_id%>" class="item-link" >
+                            <a href= "#category/" class="item-link" >
                                 <div class="item-content">
                                     <div class="item-inner"> 
-                                        <div class="item-title"><%= item.name %></div>
+                                        <div class="item-title"><%= item.product_name %></div>
                                     </div>
                                 </div>
                             </a>

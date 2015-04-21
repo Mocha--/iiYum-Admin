@@ -16,32 +16,77 @@ var Router = Backbone.Router.extend({
     "routes": {
         "": "main",
         "category": "categoryList",
+        "category_back" : "category_back",
         "category/:categoryId": "categoryDetail",
         "category/:categoryId/:productId": "productDetail"
     },
 
-    main:function(){
-        $("#categoryLink").click(function(){
-            mainView.router.loadPage("html/categoryList.html")
-        })
-    },
-
     categoryList: function() {
-        //mainView.router.loadPage("html/categoryList.html")
 
-        /*
-        app.onPageInit("category", function(page) {
+        mainView.router.load({
+                url:'html/categoryList.html',
+                reload:false,
+                ignoreCache:false
+            });
+
+        app.onPageBeforeInit('category', function (page) {
+
+            $('#categoryList').html('');
             var categoryCollection = new CategoryCollection() 
+
             var categoryListView = new CategoryListView({
+                "el": $("#categoryList"),
                 "collection": categoryCollection
             })
-            var containerView = new ContainerView(categoryListView)
 
-            categoryCollection.fetch()
+            categoryCollection.fetch({
+                success : function(collection, resp) {
+                    collection.trigger('fetch');
+                }
+            })
         })
-*/
     },
 
+    categoryDetail: function(categoryId){
+        mainView.router.load({
+                url:'html/productList.html',
+                reload:false,
+                ignoreCache:false
+            });
+
+        app.onPageBeforeInit('product', function (page) {
+
+            $('#productList').html('');
+            var productCollection = new ProductCollection() 
+            productCollection.url += categoryId
+            console.log(productCollection.url)
+
+            var productListView = new ProductListView({
+                "el": $("#productList"),
+                "collection": productCollection
+            })
+
+            productCollection.fetch({
+                success : function(collection, resp) {
+                    collection.trigger('fetch');
+                }
+            })
+        })
+    },
+/*
+    category_back: function(){
+
+        mainView.router.back({
+                url:'html/categoryList.html',
+                reload:false,
+                ignoreCache:false
+            });
+            App.onPageBack('category_list', function (page) {
+                myApp.mainView.loadPage('');
+            });
+    }
+
+    /*
     categoryDetail: function(category_id) {
         var productcollection = new ProductCollection()
         productcollection.url += category_id
@@ -65,7 +110,7 @@ var Router = Backbone.Router.extend({
                 })
             }
         })
-    }
+    }*/
 })
 
 var router = new Router()

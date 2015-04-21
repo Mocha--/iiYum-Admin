@@ -2,8 +2,8 @@
 
 "use strict"
 
-var HOST = "http://localhost/iiYum-Backend/ciadmin/index.php"
-    //var HOST = "http://localhost/php/iiyum/ciadmin/index.php"
+//var HOST = "http://localhost/iiYum-Backend/ciadmin/index.php"
+var HOST = "http://localhost/php/iiyum/ciadmin/index.php"
 
 var Category = Backbone.Model.extend({
 
@@ -27,6 +27,12 @@ var Category = Backbone.Model.extend({
 })
 
 var CategoryCollection = Backbone.Collection.extend({
+
+    initialize: function(){
+        this.on("fetch", function(){
+            console.log("fetch!")
+        })
+    },
 
     model: Category,
     url: HOST + "/product/getcategories"
@@ -52,6 +58,9 @@ var ProductCollection = Backbone.Collection.extend({
 
     model: Product,
     url: HOST + "/product/getproductsbycategoryid/?category_id="
+    /*url : function(id){
+        return HOST + "/product/getproductsbycategoryid/?category_id=" + id
+    }*/
 
 })
 
