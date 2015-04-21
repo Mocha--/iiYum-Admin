@@ -22,8 +22,14 @@ var Router = Backbone.Router.extend({
 
     main: function() {
         $("#categoryLink").click(function() {
-            $("#")
-            mainView.router.loadPage("html/categoryList.html")
+            console.log($("#mainView").html())
+            $("#mainView").html()
+
+            mainView.router.load({
+                "url": "html/categoryList.html"
+            })
+            console.log($("#mainView").html())
+                //mainView.router.reloadPage("html/categoryList.html")
         })
 
     },
