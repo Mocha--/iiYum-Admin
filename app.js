@@ -26,10 +26,10 @@ $(document).ready(function() {
             })
 
             app.onPageInit("category", function(page) {
-                $("#categoryList").empty()
                 var categoryCollection = new CategoryCollection()
                 var categoryListView = new CategoryListView({
-                    "el": $("#categoryList")
+                    "el": $("#categoryList"),
+                    "collection": categoryCollection
                 })
                 categoryCollection.fetch({
                     success: function(collection, res) {

@@ -4,9 +4,8 @@
 "use strict"
 
 var CategoryListView = Backbone.View.extend({
-    
+
     initialize: function() {
-        console.log(this.el)
         this.template = _.template($("#categoryListTemplate").html())
         this.listenTo(this.collection, "fetch", this.render)
     },
