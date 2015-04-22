@@ -23,6 +23,7 @@ $(document).ready(function() {
         },
 
         main: function() {
+            /*
             $("#categoryLink").click(function() {
                 mainView.router.load({
                     url: 'html/categoryList.html',
@@ -30,18 +31,19 @@ $(document).ready(function() {
                     ignoreCache: false
                 })
             })
+*/
 
         },
 
         categoryList: function() {
 
-            /*
-                        mainView.router.load({
-                            url: 'html/categoryList.html',
-                            reload: false,
-                            ignoreCache: false
-                        })
-            */
+
+            mainView.router.load({
+                url: 'html/categoryList.html',
+                reload: false,
+                ignoreCache: false
+            })
+
 
             app.onPageInit("category", function(page) {
                 var categoryCollection = new CategoryCollection()
