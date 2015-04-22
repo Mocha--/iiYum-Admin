@@ -12,7 +12,22 @@ var CategoryListView = Backbone.View.extend({
 
     render: function() {
         this.$el.html(this.template({
-            collection: this.collection.toJSON()
+            list : this.collection.toJSON()
         }))
     }
 })
+
+var ProductListView = Backbone.View.extend({
+
+    initialize: function() {
+        this.template = _.template($("#productListTemplate").html())
+        this.listenTo(this.collection, "fetch", this.render)
+    },
+
+    render: function() {
+        this.$el.html(this.template({
+            list : this.collection.toJSON()
+        }))
+    }
+})
+
