@@ -2,7 +2,7 @@
 <div class="navbar">
     <div class="navbar-inner">
         <div class="left">
-            <a href="" class="back link"> <i class="icon icon-back"></i>
+            <a id = "backLink" href="" class="back link"><i class="icon icon-back"></i>
                 <span>Back</span></a>
         </div>
         <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
@@ -27,7 +27,7 @@
             </ul>
             <script id="categoryListTemplate" type="text/template">
                 <% _.each(list , function(item){ %>
-                    <li>
+                    <li class = "categoryLi">
                         <a href="#category/<%= item.category_id%>" class="item-link">
                             <div class="item-content">
                                 <div class="item-inner">

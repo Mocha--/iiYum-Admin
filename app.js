@@ -12,6 +12,8 @@ $(document).ready(function() {
         "dynamicNavbar": true
     })
 
+    var action = ""
+
     var Router = Backbone.Router.extend({
 
         "routes": {
@@ -23,67 +25,95 @@ $(document).ready(function() {
         },
 
         main: function() {
-            /*
             $("#categoryLink").click(function() {
+                action = "forward"
+            })
+
+            if (action == "back") {
+                mainView.router.back({
+                    url: "",
+                    reload: false,
+                    ignoreCache: false
+                })
+            }
+
+        },
+
+        categoryList: function() {
+            $("#backLink").click(function() {
+                action = "back"
+            })
+
+            $(".categoryList").click(function() {
+                action = "forward"
+            })
+
+            if (action == "forward") {
                 mainView.router.load({
                     url: 'html/categoryList.html',
                     reload: false,
                     ignoreCache: false
                 })
-            })
-*/
 
-        },
-
-        categoryList: function() {
-
-
-            mainView.router.load({
-                url: 'html/categoryList.html',
-                reload: false,
-                ignoreCache: false
-            })
-
-
-            app.onPageInit("category", function(page) {
-                var categoryCollection = new CategoryCollection()
-                var categoryListView = new CategoryListView({
-                    "el": $("#categoryList"),
-                    "collection": categoryCollection
+                app.onPageInit("category", function(page) {
+                    var categoryCollection = new CategoryCollection()
+                    var categoryListView = new CategoryListView({
+                        "el": $("#categoryList"),
+                        "collection": categoryCollection
+                    })
+                    categoryCollection.fetch({
+                        success: function(collection, res) {
+                            collection.trigger("fetch")
+                        }
+                    })
                 })
-                categoryCollection.fetch({
-                    success: function(collection, res) {
-                        collection.trigger("fetch")
-                    }
+            } else {
+                app.onPageInit("category", function(page) {
+                    var categoryCollection = new CategoryCollection()
+                    var categoryListView = new CategoryListView({
+                        "el": $("#categoryList"),
+                        "collection": categoryCollection
+                    })
+                    categoryCollection.fetch({
+                        success: function(collection, res) {
+                            collection.trigger("fetch")
+                        }
+                    })
                 })
-            })
+
+            }
         },
 
         categoryDetail: function(categoryId) {
-            mainView.router.load({
-                url: 'html/productList.html',
-                reload: false,
-                ignoreCache: false
-            });
-
-            app.onPageBeforeInit('product', function(page) {
-
-                $('#productList').html('');
-                var productCollection = new ProductCollection()
-                productCollection.url += categoryId
-                console.log(productCollection.url)
-
-                var productListView = new ProductListView({
-                    "el": $("#productList"),
-                    "collection": productCollection
-                })
-
-                productCollection.fetch({
-                    success: function(collection, resp) {
-                        collection.trigger('fetch');
-                    }
-                })
+            $("#backLink").click(function() {
+                action = "back"
             })
+            if (action == "forward") {
+                mainView.router.load({
+                    url: 'html/productList.html',
+                    reload: false,
+                    ignoreCache: false
+                });
+
+                app.onPageBeforeInit('product', function(page) {
+
+                    $('#productList').html('');
+                    var productCollection = new ProductCollection()
+                    productCollection.url += categoryId
+                    console.log(productCollection.url)
+
+                    var productListView = new ProductListView({
+                        "el": $("#productList"),
+                        "collection": productCollection
+                    })
+
+                    productCollection.fetch({
+                        success: function(collection, resp) {
+                            collection.trigger('fetch');
+                        }
+                    })
+                })
+            }
         },
 
     })
